@@ -1,0 +1,8 @@
+.claude/
+CLAUDE.md
+Guias_IC/
+
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
