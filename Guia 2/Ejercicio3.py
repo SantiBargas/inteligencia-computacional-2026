@@ -120,10 +120,7 @@ def Probar(x_test, y_test, w, activacion):
             x = np.concatenate(([-1], y[p]))
             y.append(PropagacionAdelante(x, w[p], activacion))
 
-        # argmax en vez de signo() elemento a elemento: signo() puede dar un
-        # código inválido (ej. dos +1) mientras la red no está bien polarizada,
-        # aunque la clase de mayor valor ya sea la correcta.
-        if np.argmax(y[-1]) == np.argmax(y_test[n]):
+        if np.array_equal(signo(y[-1]), y_test[n]):
             aciertos += 1
 
     return aciertos, n_patrones
@@ -174,7 +171,7 @@ def graficar_historial(historial_xi, historial_error_clasif, etiqueta=""):
     ax2.plot(historial_error_clasif, marker='.', markersize=3, color='darkorange', label=etiqueta)
     ax2.set_xlabel('Época')
     ax2.set_ylabel('Fracción de patrones mal clasificados')
-    ax2.set_title('Error de clasificación\n(usando argmax(salida) vs. clase deseada)')
+    ax2.set_title('Error de clasificación\n(usando signo(salida) vs. clase deseada)')
     ax2.set_ylim(0, 1)
     ax2.grid(True, alpha=0.4)
 
@@ -216,7 +213,7 @@ def Ejercicio3(capas, ruta_train, ruta_test, vel_aprendizaje, max_epocas, err_um
                 w[p] = ActualizarPesos(w[p], deltas[p], entrada_con_bias, vel_aprendizaje) #actualizamos los pesos de la capa p
 
             error_epoca += 0.5 * np.sum(e**2) #acumulamos el error cuadrático medio de todos los patrones de entrenamiento
-            if np.argmax(y[-1]) == np.argmax(y_train[n]):
+            if np.array_equal(signo(y[-1]), y_train[n]):
                 aciertos_epoca += 1
 
         tasa_aciertos = aciertos_epoca / n_patrones  

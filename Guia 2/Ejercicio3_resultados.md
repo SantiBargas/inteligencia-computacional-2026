@@ -3,7 +3,9 @@
 Parámetros fijos: `seed=42`, `b=1` (ganancia sigmoide), `max_epocas=3000`,
 criterio de corte por `tasa_aciertos_train >= 1.0` (sin corte anticipado en
 95%, para no limitar artificialmente el resultado en train). Clasificación
-decidida por `argmax` sobre las 3 salidas. Dataset: 111 patrones de
+decidida por `signo()` elemento a elemento sobre las 3 salidas (la tabla de
+la sección "Resultados" se generó con una versión anterior del código — ver
+nota en "Curvas de entrenamiento"). Dataset: 111 patrones de
 entrenamiento, 37 de prueba, 4 entradas, 3 salidas (código binario de
 especie: setosa=[-1,-1,1], versicolor=[-1,1,-1], virginica=[1,-1,-1]).
 
@@ -31,6 +33,35 @@ especie: setosa=[-1,-1,1], versicolor=[-1,1,-1], virginica=[1,-1,-1]).
 Ninguna corrida convergió formalmente al 100% en train (99.1% fue el techo
 real, salvo con `lr=0.5`), así que las 16 corridas usaron las 3000 épocas
 completas.
+
+## Curvas de entrenamiento (ξ y error de clasificación)
+
+Con `lr=0.1` se generó, para cada una de las 4 arquitecturas, el gráfico de
+evolución por época de dos curvas distintas (archivos
+`Ejercicio3_historial_<arquitectura>.png`):
+
+- **ξ = ½·Σe²** (panel izquierdo): mide qué tan cerca está cada salida
+  continua de la red del valor objetivo exacto (±1). Es la función de costo
+  que minimiza el gradiente descendente.
+- **Error de clasificación** (panel derecho): mide si `signo(salida)`
+  coincide elemento a elemento con el código de la clase objetivo (las 3
+  posiciones tienen que tener el signo correcto) — un criterio binario de
+  acierto/error que no le importa la magnitud, solo el signo de cada salida.
+
+Ambas curvas se calculan sobre los **mismos** patrones de train en la misma
+época — la diferencia no es el dato, es qué miden sobre las salidas de la
+red. Por eso en los gráficos el error de clasificación cae a casi 0 y se
+aplana rápido (~época 100-150), mientras que ξ sigue bajando mucho más
+tiempo: el gradiente sigue empujando las salidas a acercarse más a ±1
+exactos, no solo a que tengan el signo correcto. Es el mismo fenómeno que se
+ve en el Ejercicio 1, donde XOR llegaba a 100% de aciertos mucho antes de
+que `xi` bajara del umbral de corte.
+
+**Nota metodológica:** la tabla de la sección "Resultados" se generó con una
+versión anterior del código, así que no es directamente comparable punto por
+punto con estas curvas. Con `signo()`, ninguna de las 4 arquitecturas
+convergió formalmente en 3000 épocas, y el piso de error de clasificación en
+train quedó en 0.009 (1 patrón mal clasificado de 111).
 
 ## Explicación
 
