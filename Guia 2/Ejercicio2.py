@@ -140,7 +140,7 @@ def graficar_resultado(w, activacion, x, d, x_min=0, x_max=1.2, y_min=0, y_max=1
     clases = np.array([clasificar(p, w, activacion) for p in puntos]).reshape(xx.shape)
 
     plt.figure()
-    plt.contourf(xx, yy, clases, levels=[-1.5, 0, 1.5], colors=['blue', 'white'], alpha=0.4)
+    plt.contourf(xx, yy, clases, levels=[-1.5, 0, 1.5], colors=['blue', 'orange'], alpha=0.4)
 
 
     clase_pos = d.flatten() == 1
@@ -201,7 +201,7 @@ def Ejercicio2(capas, ruta_train, ruta_test, vel_aprendizaje, max_epocas, err_um
     return w  # Devolvemos los pesos finales de la red
 
 np.random.seed(42) #Fijamos semilla aleatoria para analisis 
-w = Ejercicio2([2,3,1], 'concent_trn.csv', 'concent_tst.csv', 0.01, 300, 0.05, sigmoide)
+w = Ejercicio2([2,10,1], 'concent_trn.csv', 'concent_tst.csv', 0.01, 300, 0.05, sigmoide)
 
 print("Pesos finales:")
 for i, wp in enumerate(w):

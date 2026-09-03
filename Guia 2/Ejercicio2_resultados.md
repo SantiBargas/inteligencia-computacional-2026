@@ -36,5 +36,4 @@ convergieron ya con `lr=0.1`, sin necesitar ajuste, y dieron los mejores
 resultados en test. Con **tres capas ocultas** el resultado fue mixto.
 
 **Arquitectura recomendada: [2,3,3,1]** con `lr=0.01` — es la más chica de las
-que funcionan bien (6 neuronas ocultas en total) y logró el mejor accuracy en
-test (97.6%).
+que funcionan bien (6 neuronas ocultas en total) y logró en test (97.6%).

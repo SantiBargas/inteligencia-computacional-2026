@@ -93,6 +93,16 @@ def Retropropagacion(e,y,w):
 def ActualizarPesos(w_capa, delta_capa, entrada_con_bias, vel_aprendizaje):
     """Devuelve la matriz de pesos actualizada de una capa"""
     return w_capa + vel_aprendizaje * np.outer(delta_capa, entrada_con_bias)
+    #entrada_con_bias = [-1, x1, x2]        # sesgo + 2 entradas → vector de 3 elementos
+    #delta_capa        = [δ1, δ2, δ3]        # un delta por cada una de las 3 neuronas ocultas
+
+    #np.outer(delta_capa, entrada_con_bias) =
+
+    #[[ δ1*(-1),  δ1*x1,  δ1*x2 ],     ← fila de actualizaciones para la neurona 1
+    #[ δ2*(-1),  δ2*x1,  δ2*x2 ],     ← fila de actualizaciones para la neurona 2
+    #[ δ3*(-1),  δ3*x1,  δ3*x2 ]]     ← fila de actualizaciones para la neurona 3
+
+
 
 def Probar(x_test, y_test, w, activacion):
     n_patrones = x_test.shape[0]
