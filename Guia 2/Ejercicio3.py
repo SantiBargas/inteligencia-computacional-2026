@@ -170,7 +170,7 @@ def graficar_historial(historial_xi, historial_error_clasif, etiqueta=""):
 
     ax2.plot(historial_error_clasif, marker='.', markersize=3, color='darkorange', label=etiqueta)
     ax2.set_xlabel('Época')
-    ax2.set_ylabel('Fracción de patrones mal clasificados')
+    ax2.set_ylabel('Error de clasificación')
     ax2.set_title('Error de clasificación\n(usando signo(salida) vs. clase deseada)')
     ax2.set_ylim(0, 1)
     ax2.grid(True, alpha=0.4)
@@ -222,7 +222,7 @@ def Ejercicio3(capas, ruta_train, ruta_test, vel_aprendizaje, max_epocas, err_um
 
         print(f"Época {epoca}: xi = {error_epoca}, error_clasif = {historial_error_clasif[-1]:.3f}")
 
-        if tasa_aciertos >= 1.0 or error_epoca < err_umbral:
+        if tasa_aciertos >= 0.99 or error_epoca < err_umbral:
             print(f"Convergencia alcanzada en la época {epoca}. Error: {error_epoca}")
             break
     else:
@@ -235,4 +235,4 @@ def Ejercicio3(capas, ruta_train, ruta_test, vel_aprendizaje, max_epocas, err_um
 
 
 np.random.seed(42)
-w, hist_xi, hist_err = Ejercicio3([4, 8, 3], 'iris81_trn.csv', 'iris81_tst.csv', 0.1, 3000, 0.05, sigmoide)
+w, hist_xi, hist_err = Ejercicio3([4, 3, 3], 'iris81_trn.csv', 'iris81_tst.csv', 0.1, 3000, 0.01, sigmoide)
