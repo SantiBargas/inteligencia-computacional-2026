@@ -160,7 +160,7 @@ def Ejercicio1(capas, ruta_train, ruta_test, vel_aprendizaje, max_epocas, err_um
     return w  # Devolvemos los pesos finales de la red
 
 
-
+np.random.seed(42)
 Ejercicio1([2,3,3,1], 'XOR_trn.csv', 'XOR_tst.csv', 0.1, 500, 0.05, sigmoide)
 
 

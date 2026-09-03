@@ -142,13 +142,14 @@ def graficar_resultado(w, activacion, x, d, x_min=0, x_max=1.2, y_min=0, y_max=1
     clases = np.array([clasificar(p, w, activacion) for p in puntos]).reshape(xx.shape)
 
     plt.figure()
-    plt.contourf(xx, yy, clases, levels=[-1.5, 0, 1.5], colors=['red', 'white'], alpha=0.4)
+    plt.contourf(xx, yy, clases, levels=[-1.5, 0, 1.5], colors=['blue', 'white'], alpha=0.4)
 
 
     clase_pos = d.flatten() == 1
     clase_neg = d.flatten() == -1
     plt.scatter(x[clase_pos, 0], x[clase_pos, 1], marker='x', color='black', label='+1')
     plt.scatter(x[clase_neg, 0], x[clase_neg, 1], marker='s', facecolors='none', edgecolors='red', label='-1')
+
 
     plt.xlim(x_min, x_max)
     plt.ylim(y_min, y_max)
@@ -188,7 +189,7 @@ def Ejercicio2(capas, ruta_train, ruta_test, vel_aprendizaje, max_epocas, err_um
                 aciertos_epoca += 1
 
         tasa_aciertos = aciertos_epoca / n_patrones  
-        print(f"Época {epoca}: xi = {error_epoca}, aciertos = {aciertos_epoca}, tasa = {tasa_aciertos:.2f}")
+        print(f"Época {epoca}: xi = {error_epoca}, aciertos = {aciertos_epoca}, tasa_aciertos = {tasa_aciertos:.2f}")
 
         if tasa_aciertos >= 0.95 or error_epoca < err_umbral:
             print(f"Convergencia alcanzada en la época {epoca}. Error: {error_epoca}")
@@ -201,8 +202,8 @@ def Ejercicio2(capas, ruta_train, ruta_test, vel_aprendizaje, max_epocas, err_um
 
     return w  # Devolvemos los pesos finales de la red
 
-
-w = Ejercicio2([2,3,3,1], 'concent_trn.csv', 'concent_tst.csv', 0.1, 3000, 0.05, sigmoide)
+np.random.seed(42) #Fijamos semilla aleatoria para analisis 
+w = Ejercicio2([2,8,8,1], 'concent_trn.csv', 'concent_tst.csv', 0.1, 3000, 0.05, sigmoide)
 
 print("Pesos finales:")
 for i, wp in enumerate(w):

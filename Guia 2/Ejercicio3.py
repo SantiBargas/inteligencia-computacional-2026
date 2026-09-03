@@ -233,17 +233,6 @@ def Ejercicio3(capas, ruta_train, ruta_test, vel_aprendizaje, max_epocas, err_um
 
     return w, historial_error, historial_error_clasif  # Devolvemos los pesos finales de la red
 
-arquitecturas = [[4, 3, 3], [4, 5, 3], [4, 8, 3], [4, 5, 5, 3]]
 
-for capas in arquitecturas:
-    w, hist_xi, hist_err = Ejercicio3(capas, 'iris81_trn.csv', 'iris81_tst.csv', 0.1, 3000, 0.05, sigmoide)
-
-    print(f"Pesos finales ({capas}):")
-    for i, wp in enumerate(w):
-        print(f"  W[{i}] =\n{wp}")
-
-    nombre_arq = "-".join(str(c) for c in capas)
-    graficar_historial(hist_xi, hist_err, etiqueta=str(capas))
-    plt.savefig(f"Ejercicio3_historial_{nombre_arq}.png")
-
-plt.show()
+np.random.seed(42)
+w, hist_xi, hist_err = Ejercicio3([4, 8, 3], 'iris81_trn.csv', 'iris81_tst.csv', 0.1, 3000, 0.05, sigmoide)
