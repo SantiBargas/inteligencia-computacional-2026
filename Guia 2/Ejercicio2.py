@@ -201,7 +201,7 @@ def Ejercicio2(capas, ruta_train, ruta_test, vel_aprendizaje, max_epocas, err_um
     return w  # Devolvemos los pesos finales de la red
 
 np.random.seed(42) #Fijamos semilla aleatoria para analisis 
-w = Ejercicio2([2,10,1], 'concent_trn.csv', 'concent_tst.csv', 0.01, 300, 0.05, sigmoide)
+w = Ejercicio2([2,8,8,1], 'concent_trn.csv', 'concent_tst.csv', 0.1, 300, 0.05, sigmoide)
 
 print("Pesos finales:")
 for i, wp in enumerate(w):

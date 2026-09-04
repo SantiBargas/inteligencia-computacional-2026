@@ -27,9 +27,6 @@ Con **una sola capa oculta** el problema es teóricamente representable (el
 disco central es una región convexa, y una capa oculta alcanza para eso según
 la teoría de regiones de decisión), pero la convergencia depende mucho de la
 tasa de aprendizaje: con `lr=0.1` casi todas quedaron estancadas en 63.1%
-(predicen siempre la clase mayoritaria) porque los pesos arrancan en la zona
-lineal de la sigmoide y el gradiente que llega a la capa oculta es casi nulo.
-Ajustando el `lr` (0.01 o 1.0 según el caso), la mayoría terminó convergiendo.
 
 Con **dos capas ocultas** la convergencia fue mucho más robusta: todas
 convergieron ya con `lr=0.1`, sin necesitar ajuste, y dieron los mejores
